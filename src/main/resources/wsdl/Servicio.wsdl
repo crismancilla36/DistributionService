@@ -20,25 +20,37 @@
     </wsdl:types>
     
     <wsdl:message name="ClienteIDRequest">
-        <wsdl:part name="parameter" element="tns:clienteConsulta"></wsdl:part>
+        <wsdl:part name="parameter" element="tns:clienteId"></wsdl:part>
     </wsdl:message>
     
     <wsdl:message name="ClienteRequest">
-        <wsdl:part name="parameter" element="tns:ClienteAlta"></wsdl:part>
+        <wsdl:part name="parameter" element="tns:newCliente"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:message name="ClienteResponse">
+        <wsdl:part name="parameter" element="tns:cliente"></wsdl:part>
     </wsdl:message>
     
     <wsdl:message name="TanqueIDRequest">
-        <wsdl:part name="parameter" element="tns:tanqueConsulta"></wsdl:part>
+        <wsdl:part name="parameter" element="tns:tanqueID"></wsdl:part>
     </wsdl:message>
     
     <wsdl:message name="TanqueRequest">
-        <wsdl:part name="parameter" element="tns:altaTanque"></wsdl:part>
+        <wsdl:part name="parameter" element="tns:newTanque"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:message name="TanqueResponse">
+        <wsdl:part name="parameter" element="tns:tanque"></wsdl:part>
     </wsdl:message>
     
     <wsdl:message name="SolicitudRequest">
-        <wsdl:part name="parameter" element="tns:altaSolicitud"></wsdl:part>
+        <wsdl:part name="parameter" element="tns:newSolicitud"></wsdl:part>
     </wsdl:message>
 
+    <wsdl:message name="SolicitudResponse">
+        <wsdl:part name="parameter" element="tns:solicitud"></wsdl:part>
+    </wsdl:message>
+    
      <wsdl:message name="ackResponse">
         <wsdl:part name="parameter" element="tns:ack"></wsdl:part> 
      </wsdl:message>
@@ -52,6 +64,10 @@
             <wsdl:input message="tns:ClienteIDRequest"></wsdl:input>
             <wsdl:output message="tns:ackResponse"></wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="readClientOperation">
+            <wsdl:input message="tns:ClienteIDRequest"></wsdl:input>
+            <wsdl:output message="tns:ClienteResponse"></wsdl:output>
+        </wsdl:operation>
     </wsdl:portType>
     
     <wsdl:portType name="TanquePortType">
@@ -62,6 +78,10 @@
         <wsdl:operation name="deleteTanqueOperation">
             <wsdl:input message="tns:TanqueIDRequest"></wsdl:input>
             <wsdl:output message="tns:ackResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="readTanqueOperation">
+            <wsdl:input message="tns:TanqueIDRequest"></wsdl:input>
+            <wsdl:output message="tns:TanqueResponse"></wsdl:output>
         </wsdl:operation>
     </wsdl:portType>
     
@@ -92,6 +112,15 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="readClientOperation">
+            <soap:operation soapAction="urn#NewOperation"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
     </wsdl:binding>
     
     <wsdl:binding name="TanqueBinding" type="tns:TanquePortType">
@@ -106,6 +135,14 @@
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="deleteTanqueOperation">
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="readTanqueOperation">
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
